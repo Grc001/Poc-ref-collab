@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HyperFunc, WcsGridRowData } from "wcs-core/dist/types/components/grid/grid-interface";
 import { VNode } from "wcs-core/dist/types/stencil-public-runtime";
-
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-grid-example',
@@ -41,9 +41,7 @@ import { VNode } from "wcs-core/dist/types/stencil-public-runtime";
 export class GridExampleComponent implements OnInit {
   readonly pageSize: number = 5;
   users! : any[];
-
-  constructor() {
-  }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     setTimeout(() =>
@@ -52,71 +50,16 @@ export class GridExampleComponent implements OnInit {
   }
 
   generateData(nbPage: number) {
-    this.users = [
-      {
-        "id": 1,
-        "first_name": "Connor",
-        "last_name": "Ryland",
-        "email": "cryland0@google.co.uk",
-        "ip_address": "55.58.177.143"
-      },
-      {
-        "id": 2,
-        "first_name": "Farley",
-        "last_name": "Eadie",
-        "email": "feadie1@mozilla.com",
-        "ip_address": "21.179.162.238"
-      },
-      {
-        "id": 3,
-        "first_name": "Susi",
-        "last_name": "Rowntree",
-        "email": "srowntree2@t-online.de",
-        "ip_address": "235.30.90.74"
-      },
-      {
-        "id": 4,
-        "first_name": "Dag",
-        "last_name": "Manoelli",
-        "email": "dmanoelli3@nps.gov",
-        "ip_address": "111.47.126.157"
-      },
-      {
-        "id": 5,
-        "first_name": "Glynn",
-        "last_name": "Yude",
-        "email": "gyude4@google.com.au",
-        "ip_address": "204.240.34.228"
-      },
-      {
-        "id": 6,
-        "first_name": "Guendolen",
-        "last_name": "De L'Isle",
-        "email": "gdelisle5@cbslocal.com",
-        "ip_address": "220.255.0.66"
-      },
-      {
-        "id": 7,
-        "first_name": "Lila",
-        "last_name": "Coldrick",
-        "email": "lcoldrick6@nih.gov",
-        "ip_address": "28.245.56.145"
-      },
-      {
-        "id": 8,
-        "first_name": "Desiri",
-        "last_name": "Tourville",
-        "email": "dtourville7@hexun.com",
-        "ip_address": "219.195.139.187"
-      },
-      {
-        "id": 9,
-        "first_name": "Babita",
-        "last_name": "Glenny",
-        "email": "bglenny8@smh.com.au",
-        "ip_address": "184.20.53.194"
-      }
-    ]
+    this.http.get<any[]>('http://localhost:3000/users')
+      .subscribe(
+        data => {
+          this.users = data;
+          console.log('Users data:', this.users);
+        },
+        error => {
+          console.error('Erreur lors de la récupération des utilisateurs :', error);
+        }
+      );
   }
 
   surbrillanceFormatter = (createElement: HyperFunc<VNode>, column: HTMLWcsGridColumnElement, rowData: WcsGridRowData) => {

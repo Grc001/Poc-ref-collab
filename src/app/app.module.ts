@@ -4,6 +4,7 @@ import { WcsAngularModule } from 'wcs-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GridExampleComponent } from './grid-example/grid-example.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { GridExampleComponent } from './grid-example/grid-example.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    WcsAngularModule
+    WcsAngularModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
