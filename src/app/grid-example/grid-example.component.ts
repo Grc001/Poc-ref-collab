@@ -5,38 +5,8 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-grid-example',
-  template: `
-    <h2>Tableau</h2>
-    <wcs-button shape="small"
-                class="reloadBtn"
-                (click)="reloadLessData()">
-      Reload
-    </wcs-button>
-    <wcs-grid id="grid-1" [data]=" users"selection-config="multiple">
-      <wcs-grid-column path="first_name"
-                       name="Prénom"
-                       sort
-                       (wcsSortChange)="onSortChange($event)" ></wcs-grid-column>
-      <wcs-grid-column path="last_name"
-                       name="Nom de famille"
-                       sort
-                       (wcsSortChange)="onSortChange($event)"
-                       ></wcs-grid-column>
-      <wcs-grid-column path="isAdmin"
-                       name="Administrateur"
-                       [formatter]="surbrillanceFormatter"></wcs-grid-column>
-      <wcs-grid-column path="id"
-                       name="Actions"
-                       [formatter]="actionFormatter"
-                       [width]="1"></wcs-grid-column>
-      <!-- <wcs-grid-pagination [availablePageSizes]="[5, 10, 15, 20]" [pageSize]="pageSize"></wcs-grid-pagination> -->
-    </wcs-grid>
-  `,
-  styles: [`
-    .reloadBtn {
-      padding-bottom: 8px;
-    }
-  `]
+  templateUrl: './grid-example.component.html',
+  styleUrls: ['./grid-example.component.css']
 })
 export class GridExampleComponent implements OnInit {
   readonly pageSize: number = 5;
