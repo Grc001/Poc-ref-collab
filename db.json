@@ -1,0 +1,33 @@
+{
+  "collaborators": [
+    {
+      "id": 0,
+      "values": [
+        {
+          "value": "pré",
+          "keyType": "STRING",
+          "keyName": "prenom"
+        },
+        {
+          "value": "___",
+          "keyType": "STRING",
+          "keyName": "nom"
+        },
+        {
+          "value": [
+            1999,
+            12,
+            12
+          ],
+          "keyType": "DATE",
+          "keyName": "date de naissance"
+        },
+        {
+          "value": false,
+          "keyType": "BOOLEAN",
+          "keyName": "chef"
+        }
+      ]
+    }
+  ]
+}
