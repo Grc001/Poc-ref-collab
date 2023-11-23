@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { WcsAngularModule } from 'wcs-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { GridExampleComponent } from './grid-example/grid-example.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    GridExampleComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    WcsAngularModule
   ],
   providers: [],
   bootstrap: [AppComponent]
