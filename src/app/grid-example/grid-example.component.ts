@@ -10,24 +10,22 @@ import { HttpClient } from '@angular/common/http';
 })
 export class GridExampleComponent implements OnInit {
   readonly pageSize: number = 5;
-  users! : any[];
+  columns: any[] = [];
+  users: any[] = [];
+
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    setTimeout(() =>
-        this.generateData(5)
-      , 3000);
-  }
-
-  generateData(nbPage: number) {
-    this.http.get<any[]>('http://localhost:3000/users')
+    this.http.get<any>('http://localhost:3000/db')
       .subscribe(
         data => {
-          this.users = data;
+          this.columns = data.columns;
+          this.users = data.users;
+          console.log('Columns:', this.columns);
           console.log('Users data:', this.users);
         },
         error => {
-          console.error('Erreur lors de la récupération des utilisateurs :', error);
+          console.error('Erreur lors de la récupération des données :', error);
         }
       );
   }
@@ -47,13 +45,11 @@ export class GridExampleComponent implements OnInit {
     }));
   }
 
-  // TODO don't use any type when issue will be closed : https://github.com/ionic-team/stencil-ds-output-targets/issues/219
   onSortChange($event: any) {
-    // console.log($event);
+    console.log($event);
   }
 
   reloadLessData() {
-    this.generateData(3);
+    // Vous pouvez ajouter ici la logique pour recharger les données si nécessaire
   }
-
 }

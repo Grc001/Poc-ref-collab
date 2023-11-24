@@ -30,6 +30,30 @@
       ]
     }
   ],
+  "columns": [
+    {
+      "id": 1,
+      "path" : "first_name",
+      "name":"Prénom",
+      "sort" : true
+     
+    },
+    {
+      "id": 2,
+      "path" : "last_name",
+      "name":"Nom",
+      "sort" : true
+    },
+    {
+      "id": 3,
+      "path" : "email",
+      "name":"E-mail",
+      "sort" : false
+    }
+  ],
+  "lines": [
+
+  ],
   "users": [
     
     {
