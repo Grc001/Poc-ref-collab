@@ -10,3 +10,26 @@
 
 <!-- Bouton pour ouvrir le formulaire de création de colonnes -->
 <wcs-button shape="small" class="createBtn" (click)="createNewColumns()">Create Columns</wcs-button>
+<hr>
+<hr>
+<form (submit)="createTable()" [formGroup]="createColumnsForm">
+  <label>
+    Colonne:
+    <input type="text" formControlName="columnName" required>
+  </label>
+  <label>
+    Champs:
+    <select formControlName="pathType" required>
+      <option *ngFor="let type of pathTypes" [value]="type">{{ type }}</option>
+    </select>
+  </label>
+  <label>
+    Type de données:
+    <select formControlName="dataType" required>
+      <option *ngFor="let type of dataTypes" [value]="type">{{ type }}</option>
+    </select>
+  </label>
+
+  <button type="submit">Créer</button>
+  <button type="button" (click)="closeTableCreationForm()">Annuler</button>
+</form>

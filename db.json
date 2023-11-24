@@ -54,8 +54,8 @@
     },
     {
       "id": 4,
-      "path": "first_name",
-      "name": "colonne créée",
+      "path": "ip_address",
+      "name": "Adresse IP",
       "type": "STRING",
       "sort": false
     }
