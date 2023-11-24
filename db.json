@@ -33,29 +33,35 @@
   "columns": [
     {
       "id": 1,
-      "path" : "first_name",
-      "name":"Prénom",
-      "sort" : true
-     
+      "path": "first_name",
+      "name": "Prénom",
+      "type": "STRING",
+      "sort": true
     },
     {
       "id": 2,
-      "path" : "last_name",
-      "name":"Nom",
-      "sort" : true
+      "path": "last_name",
+      "name": "Nom",
+      "type": "STRING",
+      "sort": true
     },
     {
       "id": 3,
-      "path" : "email",
-      "name":"E-mail",
-      "sort" : false
+      "path": "email",
+      "name": "E-mail",
+      "type": "EMAIL",
+      "sort": false
+    },
+    {
+      "id": 4,
+      "path": "first_name",
+      "name": "colonne créée",
+      "type": "STRING",
+      "sort": false
     }
   ],
-  "lines": [
-
-  ],
+  "lines": [],
   "users": [
-    
     {
       "id": 1,
       "first_name": "Connor",
