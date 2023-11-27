@@ -36,6 +36,7 @@
       "path": "first_name",
       "name": "Prénom",
       "type": "STRING",
+      "category": "contact",
       "sort": true
     },
     {
@@ -43,6 +44,7 @@
       "path": "last_name",
       "name": "Nom",
       "type": "STRING",
+      "category": "contact",
       "sort": true
     },
     {
@@ -50,13 +52,21 @@
       "path": "email",
       "name": "E-mail",
       "type": "EMAIL",
+      "category": "contact",
       "sort": false
     },
     {
       "id": 4,
       "path": "ip_address",
-      "name": "adresse ip",
-      "type": "STRING",
+      "name": "adresse IP",
+      "category": "infos web",
+      "sort": true
+    },
+    {
+      "id": 5,
+      "path": "hiring_date",
+      "name": "date d'embauche",
+      "category": "infos rh",
       "sort": true
     }
   ],
@@ -66,63 +76,72 @@
       "first_name": "Connor",
       "last_name": "Ryland",
       "email": "cryland0@google.co.uk",
-      "ip_address": "55.58.177.143"
+      "ip_address": "55.58.177.143",
+      "hiring_date": "12/15/1976"
     },
     {
       "id": 2,
       "first_name": "Farley",
       "last_name": "Eadie",
       "email": "feadie1@mozilla.com",
-      "ip_address": "21.179.162.238"
+      "ip_address": "21.179.162.238",
+      "hiring_date": "12/15/1976"
     },
     {
       "id": 3,
       "first_name": "Susi",
       "last_name": "Rowntree",
       "email": "srowntree2@t-online.de",
-      "ip_address": "235.30.90.74"
+      "ip_address": "235.30.90.74",
+      "hiring_date": "12/15/1976"
     },
     {
       "id": 4,
       "first_name": "Dag",
       "last_name": "Manoelli",
       "email": "dmanoelli3@nps.gov",
-      "ip_address": "111.47.126.157"
+      "ip_address": "111.47.126.157",
+      "hiring_date": "12/15/1976"
     },
     {
       "id": 5,
       "first_name": "Glynn",
       "last_name": "Yude",
       "email": "gyude4@google.com.au",
-      "ip_address": "204.240.34.228"
+      "ip_address": "204.240.34.228",
+      "hiring_date": "12/15/1976"
     },
     {
       "id": 6,
       "first_name": "Guendolen",
       "last_name": "De L'Isle",
       "email": "gdelisle5@cbslocal.com",
-      "ip_address": "220.255.0.66"
+      "ip_address": "220.255.0.66",
+      "hiring_date": "12/15/1976"
     },
     {
       "id": 7,
       "first_name": "Lila",
       "last_name": "Coldrick",
       "email": "lcoldrick6@nih.gov",
-      "ip_address": "28.245.56.145"
+      "ip_address": "28.245.56.145",
+      "hiring_date": "12/15/1976"
     },
     {
       "id": 8,
       "first_name": "Desiri",
       "last_name": "Tourville",
       "email": "dtourville7@hexun.com",
-      "ip_address": "219.195.139.187"
+      "ip_address": "219.195.139.187",
+      "hiring_date": "12/15/1976"
     },
     {
       "id": 9,
       "first_name": "Babita",
       "last_name": "Glenny",
       "email": "bglenny8@smh.com.au",
-      "ip_address": "184.20.53.194"
+      "ip_address": "184.20.53.194",
+      "hiring_date": "12/15/1976"
     }
   ]
 }

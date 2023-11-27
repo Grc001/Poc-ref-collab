@@ -13,7 +13,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   selector: 'app-grid-example',
   templateUrl: './grid-example.component.html',
   styleUrls: ['./grid-example.component.css'],
-  
 })
 export class GridExampleComponent implements OnInit {
   readonly pageSize: number = 5;
@@ -21,50 +20,56 @@ export class GridExampleComponent implements OnInit {
   users: any[] = [];
   numberOfDesiredColumns!: number;
   creatingTable: boolean = false;
-  dataTypes: string[] = ['STRING', 'NUMBER', 'BOOLEAN', 'DATE', 'EMAIL']; // Ajoutez d'autres types au besoin
-  pathTypes: string[] = ['first_name', 'last_name', 'email', 'ip_address'];
+  categories: string[] = []; 
+  pathTypes: string[] = [];
   newColumns: any[] = [];
 
   createColumnsForm: FormGroup;
 
   // ...
 
-  constructor(private http: HttpClient, private fb: FormBuilder, private cdr: ChangeDetectorRef) {
+  constructor(
+    private http: HttpClient,
+    private fb: FormBuilder,
+    private cdr: ChangeDetectorRef
+  ) {
     // Initialisez le formulaire avec les champs nécessaires
     this.createColumnsForm = this.fb.group({
       columnName: ['', Validators.required],
-      dataType: ['', Validators.required],
+      categoryName: ['', Validators.required],
       pathType: ['', Validators.required],
     });
   }
 
- 
-
   createTable() {
     // Récupérez les valeurs du formulaire en toute sécurité avec une vérification de null
     let columnName = this.createColumnsForm.get('columnName')?.value;
-    let dataType = this.createColumnsForm.get('dataType')?.value;
+    let categoryName = this.createColumnsForm.get('categoryName')?.value;
     let pathType = this.createColumnsForm.get('pathType')?.value;
     // Vérifiez que les valeurs ne sont pas nulles avant de procéder
-    if (columnName !== null && dataType !== null && pathType !== null) {
+    if (columnName !== null && pathType !== null && categoryName !== null){
       // Créez un objet JSON avec les valeurs du formulaire
       const newColumn = {
         id: this.columns.length + 1,
         path: pathType,
         name: columnName,
-        type: dataType,
+
+        category : categoryName,
         sort: true,
       };
 
       // Envoyez l'objet JSON directement à json-server pour traiter la requête POST
       this.http.post('http://localhost:3000/columns', newColumn).subscribe(
         (response) => {
-          console.log('Nouvelle colonne ajoutée avec succès dans le fichier db.json:', response);
+          console.log(
+            'Nouvelle colonne ajoutée avec succès dans le fichier db.json:',
+            response
+          );
           // Rechargez les données après l'ajout de la nouvelle colonne si nécessaire
           this.reloadData();
           // Forcez le changement de détection après la mise à jour des données
           this.cdr.detectChanges();
-       },
+        },
         (error) => {
           console.error(
             "Erreur lors de l'ajout de la nouvelle colonne :",
@@ -77,7 +82,6 @@ export class GridExampleComponent implements OnInit {
     }
 
     this.closeTableCreationForm();
-    
   }
 
   closeTableCreationForm() {
@@ -92,14 +96,37 @@ export class GridExampleComponent implements OnInit {
         console.log('Columns:', this.columns);
         console.log('Users data:', this.users);
         this.reloadData();
-        // Forcez le changement de détection après la mise à jour des données
-        this.cdr.detectChanges();
+        
       },
       (error) => {
         console.error('Erreur lors de la récupération des données :', error);
       }
     );
   }
+  getAllPathTypes(users: any[]): string[] {
+    const allPathTypes = new Set<string>();
+
+    users.forEach((user) => {
+      Object.keys(user).forEach((pathType) => {
+        allPathTypes.add(pathType);
+      });
+    });
+
+    return Array.from(allPathTypes);
+  }
+  getAllCategories(columns: any[]): string[] {
+    const allCategories = new Set<string>();
+  
+    columns.forEach((column) => {
+      const category = column.category; // Supposant que la catégorie est sous la propriété 'type'
+      if (category) {
+        allCategories.add(category);
+      }
+    });
+  
+    return Array.from(allCategories);
+  }
+
 
   ngOnInit(): void {
     this.http.get<any>('http://localhost:3000/db').subscribe(
@@ -108,6 +135,8 @@ export class GridExampleComponent implements OnInit {
         this.users = data.users;
         console.log('Columns:', this.columns);
         console.log('Users data:', this.users);
+        this.pathTypes = this.getAllPathTypes(this.users);
+        this.categories = this.getAllCategories(this.columns);
       },
       (error) => {
         console.error('Erreur lors de la récupération des données :', error);
@@ -147,5 +176,6 @@ export class GridExampleComponent implements OnInit {
   }
 
   reloadLessData() {
-    this.cdr.detectChanges();}
+    this.cdr.detectChanges();
+  }
 }

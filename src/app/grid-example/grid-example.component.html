@@ -3,7 +3,10 @@
 <wcs-card mode="raised">
   <h4>Tableau de données modulables</h4>
   <wcs-card-body>
+
+
 <wcs-grid id="grid-1" [data]="users" selection-config="multiple">
+  
   <ng-container *ngFor="let column of columns">
     <wcs-grid-column [path]="column.path" [name]="column.name" [sort]="column.sort" (wcsSortChange)="onSortChange($event)"></wcs-grid-column>
 
@@ -17,6 +20,12 @@
   <label>
     Colonne:
     <input type="text" formControlName="columnName" required>
+  </label>
+  <label>
+    Categorie:
+    <select formControlName="categoryName" required>
+      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+    </select>
   </label>
   <label>
     Champs:
