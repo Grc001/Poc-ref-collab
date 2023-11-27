@@ -4,6 +4,21 @@
   <h4>Tableau de données modulables</h4>
   <wcs-card-body>
 
+    <div class="category-select">
+      <style>
+        wcs-select{
+            width: 400px;
+        }
+    </style>
+    <wcs-form-field>
+        <wcs-label>Le select customisé</wcs-label>
+        <wcs-select id="leselect" placeholder="Le select en mode multiple" value="" multiple="" chips="" size="m">
+          <ng-container  *ngFor="let category of categories">
+            <wcs-select-option  [value]="category" chip-background-color="var(--wcs-pink)" onselect="getColumnByCategory(category)">{{category}}</wcs-select-option>
+          </ng-container>
+        </wcs-select>
+    </wcs-form-field>
+  </div>
 
 <wcs-grid id="grid-1" [data]="users" selection-config="multiple">
   
