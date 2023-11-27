@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
+
 import {
   HyperFunc,
   WcsGridRowData,
@@ -11,6 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   selector: 'app-grid-example',
   templateUrl: './grid-example.component.html',
   styleUrls: ['./grid-example.component.css'],
+  
 })
 export class GridExampleComponent implements OnInit {
   readonly pageSize: number = 5;
@@ -26,7 +29,7 @@ export class GridExampleComponent implements OnInit {
 
   // ...
 
-  constructor(private http: HttpClient, private fb: FormBuilder) {
+  constructor(private http: HttpClient, private fb: FormBuilder, private cdr: ChangeDetectorRef) {
     // Initialisez le formulaire avec les champs nécessaires
     this.createColumnsForm = this.fb.group({
       columnName: ['', Validators.required],
@@ -80,13 +83,12 @@ export class GridExampleComponent implements OnInit {
       // Envoyez l'objet JSON directement à json-server pour traiter la requête POST
       this.http.post('http://localhost:3000/columns', newColumn).subscribe(
         (response) => {
-          console.log(
-            'Nouvelle colonne ajoutée avec succès dans le fichier db.json:',
-            response
-          );
+          console.log('Nouvelle colonne ajoutée avec succès dans le fichier db.json:', response);
           // Rechargez les données après l'ajout de la nouvelle colonne si nécessaire
           this.reloadData();
-        },
+          // Forcez le changement de détection après la mise à jour des données
+          this.cdr.detectChanges();
+       },
         (error) => {
           console.error(
             "Erreur lors de l'ajout de la nouvelle colonne :",
@@ -107,13 +109,15 @@ export class GridExampleComponent implements OnInit {
   }
 
   reloadData() {
-    // Vous pouvez ajouter ici la logique pour recharger les données si nécessaire
     this.http.get<any>('http://localhost:3000/db').subscribe(
       (data) => {
         this.columns = data.columns;
         this.users = data.users;
         console.log('Columns:', this.columns);
         console.log('Users data:', this.users);
+        this.reloadData();
+        // Forcez le changement de détection après la mise à jour des données
+        this.cdr.detectChanges();
       },
       (error) => {
         console.error('Erreur lors de la récupération des données :', error);
@@ -167,6 +171,5 @@ export class GridExampleComponent implements OnInit {
   }
 
   reloadLessData() {
-    // Vous pouvez ajouter ici la logique pour recharger les données si nécessaire
-  }
+    this.cdr.detectChanges();}
 }

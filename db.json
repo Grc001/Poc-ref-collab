@@ -61,15 +61,8 @@
     },
     {
       "id": 5,
-      "path": "email",
-      "name": "toto",
-      "type": "EMAIL",
-      "sort": true
-    },
-    {
-      "id": 6,
       "path": "last_name",
-      "name": "tata",
+      "name": "gregr",
       "type": "NUMBER",
       "sort": true
     }
