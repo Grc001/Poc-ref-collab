@@ -11,8 +11,8 @@
         }
     </style>
     <wcs-form-field>
-        <wcs-label>Le select customisé</wcs-label>
-        <wcs-select id="leselect" placeholder="Le select en mode multiple" value="" multiple="" chips="" size="m">
+        <wcs-label>catégories à afficher</wcs-label>
+        <wcs-select id="leselect" placeholder="Le select en mode multiple" value="" multiple="" chips="" size="m"   [(ngModel)]="selectedCategories"   (ngModelChange)="onCategoryChange()">
           <ng-container  *ngFor="let category of categories">
             <wcs-select-option  [value]="category" chip-background-color="var(--wcs-pink)" onselect="getColumnByCategory(category)">{{category}}</wcs-select-option>
           </ng-container>
