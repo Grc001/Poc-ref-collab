@@ -6,4 +6,24 @@ form{
   display: flex;
   justify-content: center;
   gap: 2%;
+ 
+}
+wcs-card{
+padding: 1%;
+  margin: 2%;
+}
+main-container{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+wcs-grid-pagination{
+  padding: 1%;
+}
+hr{
+  margin-top: 2%;
+  margin: 2%;
 }
