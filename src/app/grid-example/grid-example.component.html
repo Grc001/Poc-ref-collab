@@ -9,9 +9,9 @@
 </wcs-grid>
 
 <!-- Bouton pour ouvrir le formulaire de création de colonnes -->
-<wcs-button shape="small" class="createBtn" (click)="createNewColumns()">Create Columns</wcs-button>
+<!-- <wcs-button shape="small" class="createBtn" (click)="createNewColumns()">Create Columns</wcs-button> -->
 <hr>
-<hr>
+
 <form (submit)="createTable()" [formGroup]="createColumnsForm">
   <label>
     Colonne:
@@ -32,4 +32,4 @@
 
   <button type="submit">Créer</button>
   <button type="button" (click)="closeTableCreationForm()">Annuler</button>
-</form>
+</form><hr>

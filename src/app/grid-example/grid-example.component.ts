@@ -35,31 +35,31 @@ export class GridExampleComponent implements OnInit {
     });
   }
 
-  createNewColumns() {
-    // Créer un objet JSON avec les nouvelles colonnes
-    const newColumnsObject = {
-      id: 4,
-      path: 'first_name',
-      name: 'colonne créée',
-      type: 'STRING',
-      sort: true,
-    };
+  // createNewColumns() {
+  //   // Créer un objet JSON avec les nouvelles colonnes
+  //   const newColumnsObject = {
+  //     id: 4,
+  //     path: 'first_name',
+  //     name: 'colonne créée',
+  //     type: 'STRING',
+  //     sort: true,
+  //   };
 
-    // Envoyer l'objet JSON directement à json-server pour traiter la requête POST
-    this.http.post('http://localhost:3000/columns', newColumnsObject).subscribe(
-      (response) => {
-        console.log(
-          'Nouvelles colonnes ajoutées avec succès dans le fichier db.json:',
-          response
-        );
-        // Recharger les données après l'ajout de nouvelles colonnes si nécessaire
-        this.reloadData();
-      },
-      (error) => {
-        console.error("Erreur lors de l'ajout des nouvelles colonnes :", error);
-      }
-    );
-  }
+  //   // Envoyer l'objet JSON directement à json-server pour traiter la requête POST
+  //   this.http.post('http://localhost:3000/columns', newColumnsObject).subscribe(
+  //     (response) => {
+  //       console.log(
+  //         'Nouvelles colonnes ajoutées avec succès dans le fichier db.json:',
+  //         response
+  //       );
+  //       // Recharger les données après l'ajout de nouvelles colonnes si nécessaire
+  //       this.reloadData();
+  //     },
+  //     (error) => {
+  //       console.error("Erreur lors de l'ajout des nouvelles colonnes :", error);
+  //     }
+  //   );
+  // }
 
   createTable() {
     // Récupérez les valeurs du formulaire en toute sécurité avec une vérification de null
@@ -99,6 +99,7 @@ export class GridExampleComponent implements OnInit {
     }
 
     this.closeTableCreationForm();
+    
   }
 
   closeTableCreationForm() {

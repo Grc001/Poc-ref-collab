@@ -55,12 +55,25 @@
     {
       "id": 4,
       "path": "ip_address",
-      "name": "Adresse IP",
+      "name": "adresse ip",
       "type": "STRING",
-      "sort": false
+      "sort": true
+    },
+    {
+      "id": 5,
+      "path": "email",
+      "name": "toto",
+      "type": "EMAIL",
+      "sort": true
+    },
+    {
+      "id": 6,
+      "path": "last_name",
+      "name": "tata",
+      "type": "NUMBER",
+      "sort": true
     }
   ],
-  "lines": [],
   "users": [
     {
       "id": 1,
