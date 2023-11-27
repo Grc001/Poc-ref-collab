@@ -1,10 +1,7 @@
-<!-- App Component Template -->
-<div>
-  <!-- Content de votre application -->
-  <div>
-    <button (click)="leftSlider.toggleSlider()">Toggle Left Slider</button>
-  </div>
 
-  <!-- Left Slider Component -->
-  <app-left-slider #leftSlider></app-left-slider>
+<div class="left-slider" [style.left]="isOpen ? '0' : '-250px'">
+  <button class="toggle-button" (click)="toggleSlider()"><p><</p></button>
+
+  <h2>Nom du projet</h2>
+  <h3>Tableaux</h3>
 </div>

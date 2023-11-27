@@ -10,7 +10,7 @@ form{
 }
 wcs-card{
 padding: 1%;
-  margin: 2%;
+  margin: 3%;
 }
 main-container{
   display: flex;
@@ -25,5 +25,8 @@ wcs-grid-pagination{
 }
 hr{
   margin-top: 2%;
+  margin: 5px;
+}
+.category-select{
   margin: 2%;
 }

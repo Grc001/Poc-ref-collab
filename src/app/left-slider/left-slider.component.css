@@ -1,9 +1,35 @@
 .left-slider {
   position: fixed;
   top: 0;
-  left: -250px; /* Initial position - caché */
-  width: 250px;
+  padding-top: 60px;
+  left: -255px;
+  width: 255px;
   height: 100%;
-  background-color: purple;
-  transition: left 0.3s ease; /* Animation de transition */
+  background-color: #1E173C;
+  transition: left 0.3s ease;
+}
+
+.toggle-button {
+  position: absolute;
+  top: 40%;
+  left: 255px; 
+  background-color: white;
+  border: none;
+  padding: 6px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  cursor: pointer;
+  background-color: #1E173C;
+}
+p{
+  color: white;
+  background-color: #1E173C;
+}
+h2, h3{
+  padding-top: 5%;
+  padding-left: 5%;
+  color: white;
+}
+*{
+  z-index: 1;
 }
