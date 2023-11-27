@@ -58,13 +58,6 @@
       "name": "adresse ip",
       "type": "STRING",
       "sort": true
-    },
-    {
-      "id": 5,
-      "path": "last_name",
-      "name": "gregr",
-      "type": "NUMBER",
-      "sort": true
     }
   ],
   "users": [

@@ -10,8 +10,6 @@
   <wcs-grid-pagination [availablePageSizes]="[5, 10, 15, 20]" [pageSize]="pageSize"></wcs-grid-pagination>
 </wcs-grid>
 
-<!-- Bouton pour ouvrir le formulaire de création de colonnes -->
-<!-- <wcs-button shape="small" class="createBtn" (click)="createNewColumns()">Create Columns</wcs-button> -->
 <hr>
 
 <form (submit)="createTable()" [formGroup]="createColumnsForm">
@@ -25,12 +23,7 @@
       <option *ngFor="let type of pathTypes" [value]="type">{{ type }}</option>
     </select>
   </label>
-  <label>
-    Type de données:
-    <select formControlName="dataType" required>
-      <option *ngFor="let type of dataTypes" [value]="type">{{ type }}</option>
-    </select>
-  </label>
+
 
   <button type="submit">Créer</button>
   <button type="button" (click)="closeTableCreationForm()">Annuler</button>
