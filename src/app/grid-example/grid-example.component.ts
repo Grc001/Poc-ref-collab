@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import {
   HyperFunc,
@@ -114,11 +115,12 @@ export class GridExampleComponent implements OnInit {
 
     return Array.from(allPathTypes);
   }
+
   getAllCategories(columns: any[]): string[] {
     const allCategories = new Set<string>();
   
     columns.forEach((column) => {
-      const category = column.category; // Supposant que la catégorie est sous la propriété 'type'
+      const category = column.category; 
       if (category) {
         allCategories.add(category);
       }
@@ -126,6 +128,20 @@ export class GridExampleComponent implements OnInit {
   
     return Array.from(allCategories);
   }
+  // getColumnByCategory(category: string):  string[] {
+  //   this.http.get<any>('http://localhost:3000/db').subscribe(
+  //     (data) => {
+  //       this.columns = data.columns;
+  //       this.users = data.users;
+  //       this.pathTypes = this.getAllPathTypes(this.users);
+  //       this.categories = this.getAllCategories(this.columns);
+  //     },
+  //     (error) => {
+  //       console.error('Erreur lors de la récupération des données :', error);
+  //     }
+  //   );console.log(this.categories);
+  // }
+  
 
 
   ngOnInit(): void {
@@ -133,15 +149,14 @@ export class GridExampleComponent implements OnInit {
       (data) => {
         this.columns = data.columns;
         this.users = data.users;
-        console.log('Columns:', this.columns);
-        console.log('Users data:', this.users);
         this.pathTypes = this.getAllPathTypes(this.users);
         this.categories = this.getAllCategories(this.columns);
       },
       (error) => {
         console.error('Erreur lors de la récupération des données :', error);
       }
-    );
+    );console.log(this.categories);
+  
   }
 
   surbrillanceFormatter = (
