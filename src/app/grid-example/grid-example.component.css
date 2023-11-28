@@ -1,3 +1,6 @@
+* {
+  overflow-y: auto;
+}
 .reloadBtn {
   padding-bottom: 8px;
 }
@@ -23,10 +26,17 @@ main-container{
 wcs-grid-pagination{
   padding: 1%;
 }
+wcs-select{
+  width: 400px;
+}
 hr{
   margin-top: 2%;
   margin: 5px;
 }
 .category-select{
   margin: 2%;
+}
+.category-select {
+  margin-top: 1%;
+  margin-bottom: 1%;
 }

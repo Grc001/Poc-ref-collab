@@ -1,6 +1,6 @@
 
 wcs-footer{
-position: fixed;
+position: initial;
 bottom: 0;
 z-index: 2;
 }
