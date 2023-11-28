@@ -1,76 +1,74 @@
 {
-  "collaborators": [
+  "tables": [
     {
-      "id": 0,
-      "values": [
+      "id": 1,
+      "name": "collaborators",
+
+      "columns": [
         {
-          "value": "pré",
-          "keyType": "STRING",
-          "keyName": "prenom"
+          "id": 1,
+          "path": "first_name",
+          "name": "Prénom",
+          "type": "STRING",
+          "category": 1,
+          "sort": true
         },
         {
-          "value": "___",
-          "keyType": "STRING",
-          "keyName": "nom"
+          "id": 2,
+          "path": "last_name",
+          "name": "Nom",
+          "type": "STRING",
+          "category": 1,
+          "sort": true
         },
         {
-          "value": [
-            1999,
-            12,
-            12
-          ],
-          "keyType": "DATE",
-          "keyName": "date de naissance"
+          "id": 3,
+          "path": "email",
+          "name": "E-mail",
+          "type": "EMAIL",
+          "category": 1,
+          "sort": false
         },
         {
-          "value": false,
-          "keyType": "BOOLEAN",
-          "keyName": "chef"
+          "id": 4,
+          "path": "ip_address",
+          "name": "adresse IP",
+          "category": 3,
+          "sort": true
+        },
+        {
+          "id": 5,
+          "path": "hiring_date",
+          "name": "date d'embauche",
+          "category": 2,
+          "sort": true
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "collaborator_names",
+
+      "columns": [
+        {
+          "id": 1,
+          "path": "first_name",
+          "name": "Prénom",
+          "type": "STRING",
+          "category": 1,
+          "sort": true
         }
       ]
     }
   ],
-  "columns": [
-    {
-      "id": 1,
-      "path": "first_name",
-      "name": "Prénom",
-      "type": "STRING",
-      "category": "contact",
-      "sort": true
-    },
-    {
-      "id": 2,
-      "path": "last_name",
-      "name": "Nom",
-      "type": "STRING",
-      "category": "contact",
-      "sort": true
-    },
-    {
-      "id": 3,
-      "path": "email",
-      "name": "E-mail",
-      "type": "EMAIL",
-      "category": "contact",
-      "sort": false
-    },
-    {
-      "id": 4,
-      "path": "ip_address",
-      "name": "adresse IP",
-      "category": "infos web",
-      "sort": true
-    },
-    {
-      "id": 5,
-      "path": "hiring_date",
-      "name": "date d'embauche",
-      "category": "infos rh",
-      "sort": true
-    }
+  "categories": [
+    { "id": 1, "category_name": "contact" },
+    { "id": 2, "category_name": "infos RH" },
+    { "id": 3, "category_name": "infos Web" },
+    { "id": 4, "category_name": "administration" }
   ],
-  "users": [
+
+  "collaborators": [
     {
       "id": 1,
       "first_name": "Connor",

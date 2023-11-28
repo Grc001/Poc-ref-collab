@@ -20,14 +20,15 @@
     </wcs-form-field>
   </div>
 
-<wcs-grid id="grid-1" [data]="users" selection-config="multiple">
+  <wcs-grid id="grid-1" [data]="collaborators" selection-config="multiple">
+    <ng-container *ngFor="let column of columns">
+      <wcs-grid-column [path]="column.path" [name]="column.name" [sort]="column.sort" (wcsSortChange)="onSortChange($event)">
+        <!-- Additional configurations based on your needs -->
+      </wcs-grid-column>
+    </ng-container>
+    <wcs-grid-pagination [availablePageSizes]="[5, 10, 15, 20]" [pageSize]="pageSize"></wcs-grid-pagination>
+  </wcs-grid>
   
-  <ng-container *ngFor="let column of columns">
-    <wcs-grid-column [path]="column.path" [name]="column.name" [sort]="column.sort" (wcsSortChange)="onSortChange($event)"></wcs-grid-column>
-
-  </ng-container>
-  <wcs-grid-pagination [availablePageSizes]="[5, 10, 15, 20]" [pageSize]="pageSize"></wcs-grid-pagination>
-</wcs-grid>
 
 <hr>
 

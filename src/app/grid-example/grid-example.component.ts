@@ -18,7 +18,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class GridExampleComponent implements OnInit {
   readonly pageSize: number = 5;
   columns: any[] = [];
-  users: any[] = [];
+  collaborators: any[] = [];
   numberOfDesiredColumns!: number;
   creatingTable: boolean = false;
   categories: string[] = []; 
@@ -94,9 +94,9 @@ export class GridExampleComponent implements OnInit {
     this.http.get<any>('http://localhost:3000/db').subscribe(
       (data) => {
         this.columns = data.columns;
-        this.users = data.users;
+        this.collaborators = data.collaborators;
         console.log('Columns:', this.columns);
-        console.log('Users data:', this.users);
+        console.log('Users data:', this.collaborators);
         this.reloadData();
         
       },
@@ -148,18 +148,24 @@ export class GridExampleComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.http.get<any>('http://localhost:3000/db').subscribe(
+    const tableName = 'collaborators';
+  
+    this.http.get<any>(`http://localhost:3000/db/tables/${tableName}`).subscribe(
       (data) => {
         this.columns = data.columns;
-        this.users = data.users;
-        this.pathTypes = this.getAllPathTypes(this.users);
+        this.collaborators = data[tableName];
+        this.pathTypes = this.getAllPathTypes(this.collaborators);
         this.categories = this.getAllCategories(this.columns);
+  
+        console.log('Columns:', this.columns);
+        console.log('Collaborators:', this.collaborators);
+        console.log('Path Types:', this.pathTypes);
+        console.log('Categories:', this.categories);
       },
       (error) => {
         console.error('Erreur lors de la récupération des données :', error);
       }
-    );console.log(this.categories);
-  
+    );
   }
 
   surbrillanceFormatter = (
