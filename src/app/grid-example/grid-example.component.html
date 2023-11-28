@@ -6,7 +6,9 @@
 
     <div class="category-select">
     <wcs-form-field>
+
         <wcs-select id="leselect" placeholder="Selectionnez vos colones" value="" multiple="" chips="" size="m">
+
           <ng-container  *ngFor="let category of categories">
             <wcs-select-option  [value]="category" chip-background-color="var(--wcs-pink)" onselect="getColumnByCategory(category)">{{category}}</wcs-select-option>
           </ng-container>

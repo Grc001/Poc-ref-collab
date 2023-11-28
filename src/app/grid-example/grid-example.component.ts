@@ -24,6 +24,8 @@ export class GridExampleComponent implements OnInit {
   categories: string[] = []; 
   pathTypes: string[] = [];
   newColumns: any[] = [];
+  dirtyFlag = false;
+  selectedCategories: string[] = [];
 
   createColumnsForm: FormGroup;
 
@@ -54,7 +56,6 @@ export class GridExampleComponent implements OnInit {
         id: this.columns.length + 1,
         path: pathType,
         name: columnName,
-
         category : categoryName,
         sort: true,
       };
@@ -128,20 +129,22 @@ export class GridExampleComponent implements OnInit {
   
     return Array.from(allCategories);
   }
-  // getColumnByCategory(category: string):  string[] {
-  //   this.http.get<any>('http://localhost:3000/db').subscribe(
-  //     (data) => {
-  //       this.columns = data.columns;
-  //       this.users = data.users;
-  //       this.pathTypes = this.getAllPathTypes(this.users);
-  //       this.categories = this.getAllCategories(this.columns);
-  //     },
-  //     (error) => {
-  //       console.error('Erreur lors de la récupération des données :', error);
-  //     }
-  //   );console.log(this.categories);
-  // }
+  getColumnByCategory(category: string) {
+    if (this.dirtyFlag) {
+      // Appeler votre méthode ici lorsque le champ est dirty
+      console.log(`Selected category: ${category}`);
+      // Réinitialiser le drapeau après avoir traité l'événement
+      this.dirtyFlag = false;
+    }
   
+
+  console.log(category);
+  
+  }
+  onCategoryChange() {
+    // Mettre à jour le drapeau pour indiquer que le champ est dirty
+    this.dirtyFlag = true;
+  }
 
 
   ngOnInit(): void {
