@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./left-slider.component.css']
 })
 export class LeftSliderComponent implements OnInit {
-  isOpen = false;
+  isOpen = true;
 
   constructor() { }
 

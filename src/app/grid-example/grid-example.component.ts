@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 import { Observable } from 'rxjs';
+import { DataService } from '../data.service';
 
 import {
   HyperFunc,
@@ -18,15 +19,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class GridExampleComponent implements OnInit {
   readonly pageSize: number = 5;
   columns: any[] = [];
-  users: any[] = [];
+  collaborators: any[] = [];
   numberOfDesiredColumns!: number;
   creatingTable: boolean = false;
-  categories: string[] = []; 
+  categories: string[] = [];
   pathTypes: string[] = [];
   newColumns: any[] = [];
   dirtyFlag = false;
   selectedCategories: string[] = [];
-
   createColumnsForm: FormGroup;
 
   // ...
@@ -34,7 +34,8 @@ export class GridExampleComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private dataService: DataService
   ) {
     // Initialisez le formulaire avec les champs nécessaires
     this.createColumnsForm = this.fb.group({
@@ -50,13 +51,13 @@ export class GridExampleComponent implements OnInit {
     let categoryName = this.createColumnsForm.get('categoryName')?.value;
     let pathType = this.createColumnsForm.get('pathType')?.value;
     // Vérifiez que les valeurs ne sont pas nulles avant de procéder
-    if (columnName !== null && pathType !== null && categoryName !== null){
+    if (columnName !== null && pathType !== null && categoryName !== null) {
       // Créez un objet JSON avec les valeurs du formulaire
       const newColumn = {
         id: this.columns.length + 1,
         path: pathType,
         name: columnName,
-        category : categoryName,
+        category: categoryName,
         sort: true,
       };
 
@@ -91,19 +92,8 @@ export class GridExampleComponent implements OnInit {
   }
 
   reloadData() {
-    this.http.get<any>('http://localhost:3000/db').subscribe(
-      (data) => {
-        this.columns = data.columns;
-        this.users = data.users;
-        console.log('Columns:', this.columns);
-        console.log('Users data:', this.users);
-        this.reloadData();
-        
-      },
-      (error) => {
-        console.error('Erreur lors de la récupération des données :', error);
-      }
-    );
+    this.loadTableDataByIndex(1);
+    this.loadCollaboratorsData('collaborators');
   }
   getAllPathTypes(users: any[]): string[] {
     const allPathTypes = new Set<string>();
@@ -119,48 +109,47 @@ export class GridExampleComponent implements OnInit {
 
   getAllCategories(columns: any[]): string[] {
     const allCategories = new Set<string>();
-  
+
     columns.forEach((column) => {
-      const category = column.category; 
+      const category = column.category;
       if (category) {
         allCategories.add(category);
       }
     });
-  
+
     return Array.from(allCategories);
   }
-  
-  getColumnByCategory(category: string) {
-    if (this.dirtyFlag) {
-      // Appeler votre méthode ici lorsque le champ est dirty
-      console.log(`Selected category: ${category}`);
-      // Réinitialiser le drapeau après avoir traité l'événement
-      this.dirtyFlag = false;
-    }
-  
 
-  console.log(category);
-  
-  }
   onCategoryChange() {
     // Mettre à jour le drapeau pour indiquer que le champ est dirty
     this.dirtyFlag = true;
   }
 
-
   ngOnInit(): void {
-    this.http.get<any>('http://localhost:3000/db').subscribe(
+    this.loadTableDataByIndex(1);
+    this.loadCollaboratorsData('collaborators');
+  }
+
+  loadTableDataByIndex(index: number) {
+    this.http.get<any>(`http://localhost:3000/db/tables/tables`).subscribe(
       (data) => {
-        this.columns = data.columns;
-        this.users = data.users;
-        this.pathTypes = this.getAllPathTypes(this.users);
-        this.categories = this.getAllCategories(this.columns);
+        console.log(data);
+
+        this.columns = data[index].columns;
+        console.log('Columns:', this.columns);
       },
       (error) => {
-        console.error('Erreur lors de la récupération des données :', error);
+        console.error('Error loading table data:', error);
       }
-    );console.log(this.categories);
-  
+    );
+  }
+  loadCollaboratorsData(dataName: string) {
+    this.http
+      .get<any>(`http://localhost:3000/db/tables/${dataName}`)
+      .subscribe((data) => {
+        this.collaborators = data;
+        console.log('collaborators:', this.collaborators);
+      });
   }
 
   surbrillanceFormatter = (
