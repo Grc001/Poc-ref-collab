@@ -1,56 +1,61 @@
-
 <div class="main-container">
-<wcs-card mode="raised">
-  <h4>Tableau de données collaborateurs</h4>
-  <wcs-card-body>
+  <wcs-card mode="raised">
+    <h4>Tableau de données collaborateurs</h4>
+    <wcs-card-body>
+      <wcs-grid id="grid-1" [data]="collaborators" selection-config="multiple">
+        <ng-container *ngFor="let column of columns">
+          <wcs-grid-column
+            [path]="column.path"
+            [name]="column.name"
+            [sort]="column.sort"
+            (wcsSortChange)="onSortChange($event)"
+          ></wcs-grid-column>
+        </ng-container>
+        <wcs-grid-column
+          path="id"
+          name="Actions"
+          [formatter]="actionFormatter"
+          [width]="1"
+        ></wcs-grid-column>
+        <wcs-grid-pagination
+          [availablePageSizes]="[5, 10, 15, 20]"
+          [pageSize]="pageSize"
+        ></wcs-grid-pagination>
+      </wcs-grid>
 
-    <div class="category-select">
-    <wcs-form-field>
+      <hr />
 
-        <wcs-select id="leselect" placeholder="Selectionnez vos colones" value="" multiple="" chips="" size="m">
+      <form (submit)="createTable()" [formGroup]="createColumnsForm">
+        <label>
+          Colonne:
+          <input type="text" formControlName="columnName" required />
+        </label>
+        <label>
+          Categorie:
+          <select formControlName="categoryName" required>
+            <option *ngFor="let category of categories" [value]="category">
+              {{ category }}
+            </option>
+          </select>
+        </label>
+        <label>
+          Champs:
+          <select formControlName="pathType" required>
+            <option *ngFor="let type of pathTypes" [value]="type">
+              {{ type }}
+            </option>
+          </select>
+        </label>
 
-          <ng-container  *ngFor="let category of categories">
-            <wcs-select-option  [value]="category" chip-background-color="var(--wcs-pink)" onselect="getColumnByCategory(category)">{{category}}</wcs-select-option>
-          </ng-container>
-        </wcs-select>
-    </wcs-form-field>
-  </div>
-
-  <wcs-grid id="grid-1" [data]="collaborators" selection-config="multiple">
-
-  <ng-container *ngFor="let column of columns">
-    <wcs-grid-column [path]="column.path" [name]="column.name" [sort]="column.sort" (wcsSortChange)="onSortChange($event)"></wcs-grid-column>
-    
-  </ng-container>
-  <wcs-grid-column path="id" name="Actions" [formatter]="actionFormatter" [width]="1"></wcs-grid-column>
-  <wcs-grid-pagination [availablePageSizes]="[5, 10, 15, 20]" [pageSize]="pageSize"></wcs-grid-pagination>
-</wcs-grid>
-
-<hr>
-
-<form (submit)="createTable()" [formGroup]="createColumnsForm">
-  <label>
-    Colonne:
-    <input type="text" formControlName="columnName" required>
-  </label>
-  <label>
-    Categorie:
-    <select formControlName="categoryName" required>
-      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
-    </select>
-  </label>
-  <label>
-    Champs:
-    <select formControlName="pathType" required>
-      <option *ngFor="let type of pathTypes" [value]="type">{{ type }}</option>
-    </select>
-  </label>
-
-
-  <button type="submit">Créer</button>
-  <button type="button" (click)="closeTableCreationForm()">Annuler</button>
-</form><hr>
-<wcs-button shape="small" class="reloadBtn" (click)="reloadLessData()">Reload</wcs-button>
-</wcs-card-body>
-</wcs-card>
+        <button type="submit">Créer</button>
+        <button type="button" (click)="closeTableCreationForm()">
+          Annuler
+        </button>
+      </form>
+      <hr />
+      <wcs-button shape="small" class="reloadBtn" (click)="reloadLessData()"
+        >Reload</wcs-button
+      >
+    </wcs-card-body>
+  </wcs-card>
 </div>

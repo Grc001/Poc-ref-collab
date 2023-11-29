@@ -2,7 +2,7 @@
   "tables": [
     {
       "id": 1,
-      "name": "collaborators",
+      "name": "table1",
 
       "columns": [
         {
@@ -47,7 +47,7 @@
     },
     {
       "id": 2,
-      "name": "collaborator_names",
+      "name": "table2",
 
       "columns": [
         {
@@ -67,6 +67,9 @@
     { "id": 3, "category_name": "infos Web" },
     { "id": 4, "category_name": "administration" }
   ],
+
+  
+
 
   "collaborators": [
     {
