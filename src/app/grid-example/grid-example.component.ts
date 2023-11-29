@@ -129,6 +129,7 @@ export class GridExampleComponent implements OnInit {
   
     return Array.from(allCategories);
   }
+  
   getColumnByCategory(category: string) {
     if (this.dirtyFlag) {
       // Appeler votre méthode ici lorsque le champ est dirty

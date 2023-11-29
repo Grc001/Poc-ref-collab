@@ -1,14 +1,19 @@
 
 <div class="main-container">
 <wcs-card mode="raised">
-  <h4>Tableau de données collaborateurs</h4>
+  <h4>Tableau de données modulables</h4>
   <wcs-card-body>
 
     <div class="category-select">
+      <style>
+        wcs-select{
+            width: 400px;
+        }
+        
+    </style>
     <wcs-form-field>
-
-        <wcs-select id="leselect" placeholder="Selectionnez vos colones" value="" multiple="" chips="" size="m">
-
+        
+        <wcs-select id="leselect" placeholder="Selectionnez les colonnes visibles du Tableau" value="" multiple="" chips="" size="m">
           <ng-container  *ngFor="let category of categories">
             <wcs-select-option  [value]="category" chip-background-color="var(--wcs-pink)" onselect="getColumnByCategory(category)">{{category}}</wcs-select-option>
           </ng-container>
@@ -20,11 +25,11 @@
   
   <ng-container *ngFor="let column of columns">
     <wcs-grid-column [path]="column.path" [name]="column.name" [sort]="column.sort" (wcsSortChange)="onSortChange($event)"></wcs-grid-column>
-    
   </ng-container>
   <wcs-grid-column path="id" name="Actions" [formatter]="actionFormatter" [width]="1"></wcs-grid-column>
   <wcs-grid-pagination [availablePageSizes]="[5, 10, 15, 20]" [pageSize]="pageSize"></wcs-grid-pagination>
 </wcs-grid>
+
 <hr>
 
 <form (submit)="createTable()" [formGroup]="createColumnsForm">
@@ -51,5 +56,4 @@
 </form><hr>
 <wcs-button shape="small" class="reloadBtn" (click)="reloadLessData()">Reload</wcs-button>
 </wcs-card-body>
-</wcs-card>
-</div>
+</wcs-card></div>
