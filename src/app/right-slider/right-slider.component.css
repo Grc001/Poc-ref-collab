@@ -1,0 +1,26 @@
+.right-slider {
+  position: fixed;
+  top: 0;
+  padding-top: 60px;
+  right: -255px;
+  width: 555px;
+  height: 100%;
+  display: flex;
+  transition: right 0.3s ease;
+}
+
+wcs-accordion-panel{
+  margin: 5%;
+}
+wcs-card{
+  width: 100%;
+  height: 100%;
+}
+h2, h3{
+margin : 5%
+
+}
+*{
+  z-index: 1;
+  text-align: left;
+}

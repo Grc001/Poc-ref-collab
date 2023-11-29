@@ -28,8 +28,9 @@ export class GridExampleComponent implements OnInit {
   dirtyFlag = false;
   selectedCategories: string[] = [];
   createColumnsForm: FormGroup;
+  selectedCollaborator: any;
 
-  // ...
+
 
   constructor(
     private http: HttpClient,
@@ -37,13 +38,19 @@ export class GridExampleComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private dataService: DataService
   ) {
-    // Initialisez le formulaire avec les champs nécessaires
+
     this.createColumnsForm = this.fb.group({
       columnName: ['', Validators.required],
       categoryName: ['', Validators.required],
       pathType: ['', Validators.required],
     });
   }
+
+  ngOnInit(): void {
+    this.loadTableDataByIndex(0);
+    this.loadCollaboratorsData('collaborators');
+  }
+
 
   createTable() {
     // Récupérez les valeurs du formulaire en toute sécurité avec une vérification de null
@@ -125,10 +132,7 @@ export class GridExampleComponent implements OnInit {
     this.dirtyFlag = true;
   }
 
-  ngOnInit(): void {
-    this.loadTableDataByIndex(1);
-    this.loadCollaboratorsData('collaborators');
-  }
+
 
   loadTableDataByIndex(index: number) {
     this.http.get<any>(`http://localhost:3000/db/tables/tables`).subscribe(
@@ -171,13 +175,30 @@ export class GridExampleComponent implements OnInit {
         shape: 'square',
         mode: 'clear',
         className: 'wcs-primary',
-        onClick: () => console.log('clic'),
+        onClick: () => this.handleActionClick(rowData), 
       },
       createElement('wcs-mat-icon', {
         icon: 'create',
       })
     );
   };
+  
+  
+  handleActionClick(collaborator: WcsGridRowData): void {
+    if (this.selectedCollaborator !== collaborator.data) {
+      this.selectedCollaborator = collaborator.data;
+    } else {
+      this.selectedCollaborator = null;
+      setTimeout(() => {
+        
+        this.selectedCollaborator = collaborator.data;
+      });
+    
+    }
+   
+    console.log('Données du collaborateur :', this.selectedCollaborator);
+    
+  }
 
   onSortChange($event: any) {
     console.log($event);

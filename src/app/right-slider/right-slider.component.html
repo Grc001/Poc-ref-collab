@@ -1,6 +1,36 @@
-<div class="left-slider" [style.left]="isOpen ? '0' : '-250px'">
-  <button class="toggle-button" (click)="toggleSlider()"><p><</p></button>
-
-  <h2>Nom du projet</h2>
-  <h3>Tableaux</h3>
+<div class="right-slider" [style.right]="isOpen ? '0' : '-555px'">
+  <wcs-card mode="raised">
+    <h2>Fiche Info</h2>
+    <div *ngIf="selectedCollaborator">
+      <wcs-accordion>
+        <wcs-accordion-panel>
+          <wcs-accordion-header>Un premier panel</wcs-accordion-header>
+          <wcs-accordion-content
+            ><p>Nom: {{ selectedCollaborator.first_name }}</p>
+            <p>Prénom: {{ selectedCollaborator.last_name }}</p>
+            <p>Email: {{ selectedCollaborator.email }}</p>
+          </wcs-accordion-content>
+        </wcs-accordion-panel>
+        <wcs-accordion-panel>
+          <wcs-accordion-header>Un second panel</wcs-accordion-header>
+          <wcs-accordion-content>
+            <p>Nom: {{ selectedCollaborator.first_name }}</p>
+            <p>Prénom: {{ selectedCollaborator.last_name }}</p>
+            <p>Email: {{ selectedCollaborator.email }}</p>
+          </wcs-accordion-content>
+        </wcs-accordion-panel>
+        <wcs-accordion-panel>
+          <wcs-accordion-header
+            >Un second panel with a very long header text lorem ipsum dolor sit
+            amet</wcs-accordion-header
+          >
+          <wcs-accordion-content>
+            <p>Nom: {{ selectedCollaborator.first_name }}</p>
+            <p>Prénom: {{ selectedCollaborator.last_name }}</p>
+            <p>Email: {{ selectedCollaborator.email }}</p>
+          </wcs-accordion-content>
+        </wcs-accordion-panel>
+      </wcs-accordion>
+    </div>
+  </wcs-card>
 </div>
