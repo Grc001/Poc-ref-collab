@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./left-slider.component.css']
 })
 export class LeftSliderComponent implements OnInit {
-  isOpen = true;
+  isOpen = false;
   tables: any[] = [];
 
   constructor(

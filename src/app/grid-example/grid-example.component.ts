@@ -28,10 +28,9 @@ export class GridExampleComponent implements OnInit {
   dirtyFlag = false;
   selectedCategories: string[] = [];
   createColumnsForm: FormGroup;
+  selectedCollaborator: any;
 
-  tables: any[] = [];
 
-  // ...
 
   constructor(
     private http: HttpClient,
@@ -39,7 +38,7 @@ export class GridExampleComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private dataService: DataService
   ) {
-    // Initialisez le formulaire avec les champs nécessaires
+
     this.createColumnsForm = this.fb.group({
       columnName: ['', Validators.required],
       categoryName: ['', Validators.required],
@@ -48,11 +47,11 @@ export class GridExampleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadTableDataByIndex(1);
+    this.loadTableDataByIndex(0);
     this.loadCollaboratorsData('collaborators');
-    this.loadTableNames();
   }
-  
+
+
   createTable() {
     // Récupérez les valeurs du formulaire en toute sécurité avec une vérification de null
     let columnName = this.createColumnsForm.get('columnName')?.value;
@@ -133,7 +132,6 @@ export class GridExampleComponent implements OnInit {
     this.dirtyFlag = true;
   }
 
- 
 
   loadTableDataByIndex(index: number) {
     this.http.get<any>(`http://localhost:3000/db/tables/tables`).subscribe(
@@ -176,13 +174,30 @@ export class GridExampleComponent implements OnInit {
         shape: 'square',
         mode: 'clear',
         className: 'wcs-primary',
-        onClick: () => console.log('clic'),
+        onClick: () => this.handleActionClick(rowData), 
       },
       createElement('wcs-mat-icon', {
         icon: 'create',
       })
     );
   };
+  
+  
+  handleActionClick(collaborator: WcsGridRowData): void {
+    if (this.selectedCollaborator !== collaborator.data) {
+      this.selectedCollaborator = collaborator.data;
+    } else {
+      this.selectedCollaborator = null;
+      setTimeout(() => {
+        
+        this.selectedCollaborator = collaborator.data;
+      });
+    
+    }
+   
+    console.log('Données du collaborateur :', this.selectedCollaborator);
+    
+  }
 
   onSortChange($event: any) {
     console.log($event);
@@ -191,17 +206,5 @@ export class GridExampleComponent implements OnInit {
   reloadLessData() {
     this.cdr.detectChanges();
   }
-  loadTableNames() {
-    this.http.get<any>(`http://localhost:3000/db/tables/tables`).subscribe(
-      (data) => {
-        console.log(data);
   
-        this.tables = data;
-        console.log(this.tables);
-      },
-      (error) => {
-        console.error('Error loading table data:', error);
-      }
-    );
-  }
 }

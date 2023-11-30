@@ -8,3 +8,6 @@ wcs-header{
   position: relative;
   z-index:2;
 }
+.main-container{
+  min-height: 73vh;
+}
