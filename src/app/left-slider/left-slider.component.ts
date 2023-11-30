@@ -1,5 +1,5 @@
 // left-slider.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 
@@ -12,6 +12,8 @@ import { HttpClient } from '@angular/common/http';
 export class LeftSliderComponent implements OnInit {
   isOpen = false;
   tables: any[] = [];
+
+  @Output() selectedTable = new EventEmitter <number> ();
 
   constructor(
     private http: HttpClient,
@@ -39,7 +41,9 @@ export class LeftSliderComponent implements OnInit {
     );
   }
 
-  showTable(){
-    
-  }
+  showTable(value : number){
+    this.selectedTable.emit(value);
+    console.log(value);
+  } 
+  
 }

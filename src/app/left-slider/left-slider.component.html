@@ -1,7 +1,7 @@
 <div class="left-slider" [style.left]="isOpen ? '0' : '-250px'">
-  <button class="toggle-button" (click)="toggleSlider()"><p></p></button>
+  <button class="toggle-button" (click)="toggleSlider()"><p>></p></button>
 
   <h2>Liste des Tableaux</h2>
   <h4>Tableaux disponibles:</h4>
-  <p class="tableName" *ngFor="let table of tables">. {{ table.name }}</p>
+  <p class="tableName" *ngFor="let table of tables" (click)="showTable(tables.indexOf(table))" >. {{ table.name }}</p>
 </div>
