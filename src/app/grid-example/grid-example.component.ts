@@ -16,7 +16,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './grid-example.component.html',
   styleUrls: ['./grid-example.component.css'],
 })
-export class GridExampleComponent implements OnInit {
+export class GridExampleComponent implements OnInit{
   readonly pageSize: number = 5;
   columns: any[] = [];
   collaborators: any[] = [];
@@ -29,6 +29,8 @@ export class GridExampleComponent implements OnInit {
   selectedCategories: string[] = [];
   createColumnsForm: FormGroup;
   selectedCollaborator: any;
+
+  selectedTable: number = 0  
 
 
 
@@ -47,8 +49,14 @@ export class GridExampleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadTableDataByIndex(0);
+    this.loadTableDataByIndex(this.selectedTable);
     this.loadCollaboratorsData('collaborators');
+  }
+
+  selectTable(event: number){
+    this.selectedTable = event;
+    console.log(this.selectedTable);
+    this.loadTableDataByIndex(this.selectedTable);    
   }
 
 
@@ -133,13 +141,12 @@ export class GridExampleComponent implements OnInit {
   }
 
 
-
-  loadTableDataByIndex(index: number) {
+  loadTableDataByIndex(selectedTable: number) {
     this.http.get<any>(`http://localhost:3000/db/tables/tables`).subscribe(
       (data) => {
         console.log(data);
 
-        this.columns = data[index].columns;
+        this.columns = data[selectedTable].columns;
         console.log('Columns:', this.columns);
       },
       (error) => {
@@ -207,4 +214,5 @@ export class GridExampleComponent implements OnInit {
   reloadLessData() {
     this.cdr.detectChanges();
   }
+  
 }

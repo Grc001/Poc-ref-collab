@@ -1,4 +1,6 @@
 <div class="main-container">
+  <h2>POC_Ref_Collab</h2>
+  <h3>Tableaux des Collaborateurs</h3>
   <wcs-card mode="raised">
     <h4>Tableau de données collaborateurs</h4>
     <wcs-card-body>
@@ -60,3 +62,6 @@
   </wcs-card>
 </div>
 <app-right-slider [selectedCollaborator]="selectedCollaborator"></app-right-slider>
+<app-left-slider 
+(selectedTable)="selectTable($event)">  
+</app-left-slider>
