@@ -25,11 +25,16 @@ p{
   color: white;
   background-color: #1E173C;
 }
-h2, h3{
+h2, h4 {
   padding-top: 5%;
   padding-left: 5%;
   color: white;
 }
 *{
   z-index: 1;
+}
+.tableName {
+  margin-top: 8%;
+  margin-left: 20%;
+  
 }

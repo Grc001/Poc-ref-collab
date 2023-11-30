@@ -29,6 +29,8 @@ export class GridExampleComponent implements OnInit {
   selectedCategories: string[] = [];
   createColumnsForm: FormGroup;
 
+  tables: any[] = [];
+
   // ...
 
   constructor(
@@ -45,6 +47,12 @@ export class GridExampleComponent implements OnInit {
     });
   }
 
+  ngOnInit(): void {
+    this.loadTableDataByIndex(1);
+    this.loadCollaboratorsData('collaborators');
+    this.loadTableNames();
+  }
+  
   createTable() {
     // Récupérez les valeurs du formulaire en toute sécurité avec une vérification de null
     let columnName = this.createColumnsForm.get('columnName')?.value;
@@ -125,10 +133,7 @@ export class GridExampleComponent implements OnInit {
     this.dirtyFlag = true;
   }
 
-  ngOnInit(): void {
-    this.loadTableDataByIndex(1);
-    this.loadCollaboratorsData('collaborators');
-  }
+ 
 
   loadTableDataByIndex(index: number) {
     this.http.get<any>(`http://localhost:3000/db/tables/tables`).subscribe(
@@ -185,5 +190,18 @@ export class GridExampleComponent implements OnInit {
 
   reloadLessData() {
     this.cdr.detectChanges();
+  }
+  loadTableNames() {
+    this.http.get<any>(`http://localhost:3000/db/tables/tables`).subscribe(
+      (data) => {
+        console.log(data);
+  
+        this.tables = data;
+        console.log(this.tables);
+      },
+      (error) => {
+        console.error('Error loading table data:', error);
+      }
+    );
   }
 }
