@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
-import { Observable } from 'rxjs';
 import { DataService } from '../data.service';
-
 import {
   HyperFunc,
   WcsGridRowData,
@@ -31,7 +29,7 @@ export class GridExampleComponent implements OnInit{
   selectedCollaborator: any;
 
   selectedTable: number = 0  
-
+  selectedData : string = "collaborators"
 
 
   constructor(
@@ -49,13 +47,12 @@ export class GridExampleComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.loadData(this.selectedTable , "collaborators")
+    this.loadData(this.selectedTable , this.selectedData)
   }
 
   selectTable(event: number){
     this.selectedTable = event;
-    console.log(this.selectedTable);
-    this.loadData(this.selectedTable , "collaborators")
+    this.loadData(this.selectedTable , this.selectedData)
   }
 
 
@@ -106,7 +103,7 @@ export class GridExampleComponent implements OnInit{
   }
 
   reloadData() {
-    this.loadData(this.selectedTable , "collaborators")
+    this.loadData(this.selectedTable , this.selectedData)
   }
   getAllPathTypes(users: any[]): string[] {
     const allPathTypes = new Set<string>();
