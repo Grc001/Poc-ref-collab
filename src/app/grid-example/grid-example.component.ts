@@ -49,14 +49,13 @@ export class GridExampleComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.loadTableDataByIndex(this.selectedTable);
-    this.loadCollaboratorsData('collaborators');
+    this.loadData(this.selectedTable , "collaborators")
   }
 
   selectTable(event: number){
     this.selectedTable = event;
     console.log(this.selectedTable);
-    this.loadTableDataByIndex(this.selectedTable);    
+    this.loadData(this.selectedTable , "collaborators")
   }
 
 
@@ -107,8 +106,7 @@ export class GridExampleComponent implements OnInit{
   }
 
   reloadData() {
-    this.loadTableDataByIndex(1);
-    this.loadCollaboratorsData('collaborators');
+    this.loadData(this.selectedTable , "collaborators")
   }
   getAllPathTypes(users: any[]): string[] {
     const allPathTypes = new Set<string>();
@@ -140,28 +138,38 @@ export class GridExampleComponent implements OnInit{
     this.dirtyFlag = true;
   }
 
-
-  loadTableDataByIndex(selectedTable: number) {
+  loadData(selectedTable: number, dataName: string) {
     this.http.get<any>(`http://localhost:3000/db/tables/tables`).subscribe(
       (data) => {
         console.log(data);
-
+  
         this.columns = data[selectedTable].columns;
         console.log('Columns:', this.columns);
+  
+        this.http
+          .get<any>(`http://localhost:3000/db/tables/${dataName}`)
+          .subscribe((collaboratorsData) => {
+            this.filterCollaborators(collaboratorsData);
+          });
       },
       (error) => {
         console.error('Error loading table data:', error);
       }
     );
   }
-  loadCollaboratorsData(dataName: string) {
-    this.http
-      .get<any>(`http://localhost:3000/db/tables/${dataName}`)
-      .subscribe((data) => {
-        this.collaborators = data;
-        console.log('collaborators:', this.collaborators);
+  filterCollaborators(collaboratorsData: any[]) {
+    this.collaborators = collaboratorsData.map((collaborator: any) => {
+      const filteredCollaborator: any = {};
+      this.columns.forEach((column: any) => {
+        filteredCollaborator[column.path] = collaborator[column.path];
       });
+      return filteredCollaborator;
+    });
+  
+    console.log('Filtered collaborators:', this.collaborators);
   }
+  
+  
 
   surbrillanceFormatter = (
     createElement: HyperFunc<VNode>,

@@ -1,6 +1,6 @@
 
 wcs-footer{
-position: initial;
+position: fixed;
 bottom: 0;
 z-index: 2;
 }
@@ -9,5 +9,5 @@ wcs-header{
   z-index:2;
 }
 .main-container{
-  min-height: 73vh;
+margin-bottom : 20%;
 }

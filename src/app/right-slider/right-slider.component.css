@@ -1,7 +1,6 @@
 .right-slider {
   position: fixed;
   top: 0;
-  padding-top: 60px;
   right: -255px;
   width: 555px;
   height: 100%;
@@ -13,6 +12,7 @@ wcs-accordion-panel{
   margin: 5%;
 }
 wcs-card{
+  padding-top: 50px;
   width: 100%;
   height: 100%;
 }
